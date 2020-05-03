@@ -28,7 +28,7 @@ app.post('/', function (req, res) {
         res.render('index', {domains: null, error: 'Error, please try again'});
       } else {
         //et weatherText = `It's ${weather.main.temp} degrees in ${weather.name}!`;
-        const domains = resp.domains.map(d => ({domain: d.domain, createdOn: moment(d.create_date, "MM-DD-YYYY"), country: d.country, isActive: !d.isDead}));        
+        const domains = resp.domains.map(d => ({domain: d.domain, createdOn: moment(new Date(d.create_date), "MM-DD-YYYY"), country: d.country, isActive: !d.isDead}));        
         res.render('index', {domains: domains, error: null});
       }
     }
