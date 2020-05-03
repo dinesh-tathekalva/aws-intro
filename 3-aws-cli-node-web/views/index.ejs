@@ -14,16 +14,16 @@
           <input type="submit" class="ghost-button" value="Search">
         </form>
         <% if(domains !== null){ %> 
-          <div style="display: flex;">
+          <div style="display: flex; flex-wrap: wrap;">
           <% for (var i = 0; i < domains.length; i++) { %>
             <div style="width: 150px; padding: 10px; margin: 5px;">
-              Domain: <%= domains[i].domain %>
+              <b>Domain:</b> <%= domains[i].domain %>
               <br />
-              Created On: <%= domains[i].createdOn %>
+              <b>Created On:</b> <%= domains[i].createdOn %>
               <br />
-              Is Active: <%= domains[i].isActive %>
+              <b>Is Active:</b> <%= domains[i].isActive %>
               <br />
-              Country: <%= domains[i].country %>
+              <b>Country:</b> <%= domains[i].country %>
             </div>
           <% } %>
           </div>
