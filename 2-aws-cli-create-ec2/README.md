@@ -46,3 +46,8 @@ aws configure
 | South America (São Paulo)  | sa-east-1      | 
 
 ![AWS Configure](aws-configure.png)
+
+> Run the following command to check the configuration done properly
+```
+aws s3 ls
+```

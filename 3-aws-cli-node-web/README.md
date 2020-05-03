@@ -11,7 +11,11 @@ nvm install node
 node -e "console.log('Running Node.js ' + process.version)"
 ```
 
-> 
+> Install git client
+```
+sudo yum install git -y
+```
+
 ```
 mkdir app
 cd app
