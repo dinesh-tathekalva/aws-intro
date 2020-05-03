@@ -19,11 +19,11 @@ app.post('/', function (req, res) {
 
   request(url, function (err, response, body) {
     if(err){
-      res.render('index', {createdOn: null, error: 'Error, please try again'});
+      res.render('index', {domains: null, error: 'Error, please try again'});
     } else {
       let resp = JSON.parse(body)
       if(resp.domains == undefined){
-        res.render('index', {c: null, error: 'Error, please try again'});
+        res.render('index', {domains: null, error: 'Error, please try again'});
       } else {
         //et weatherText = `It's ${weather.main.temp} degrees in ${weather.name}!`;
         const domains = resp.domains.map(d => ({domain: d.domain, createdOn: d.create_date, country: d.country, isActive: !d.isDead}));
