@@ -1,40 +1,7 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const request = require('request');
-const moment = require('moment');
-
+const express = require('express')
 const app = express()
+const port = 3000
 
-const apiKey = '*****************';
+app.get('/', (req, res) => res.send('Hello World!'))
 
-app.use(express.static('public'));
-app.use(bodyParser.urlencoded({ extended: true }));
-app.set('view engine', 'ejs')
-
-app.get('/', function (req, res) {
-  res.render('index', {domains: null, error: null});
-})
-
-app.post('/', function (req, res) {
-  let domain = req.body.domain;
-  let url = `https://api.domainsdb.info/v1/domains/search?domain=${domain}`
-
-  request(url, function (err, response, body) {
-    if(err){
-      res.render('index', {domains: null, error: 'Error, please try again'});
-    } else {
-      let resp = JSON.parse(body)
-      if(resp.domains == undefined){
-        res.render('index', {domains: null, error: 'Error, please try again'});
-      } else {
-        //et weatherText = `It's ${weather.main.temp} degrees in ${weather.name}!`;
-        const domains = resp.domains.map(d => ({domain: d.domain, createdOn: moment(new Date(d.create_date), "MM-DD-YYYY"), country: d.country, isActive: !d.isDead}));        
-        res.render('index', {domains: domains, error: null});
-      }
-    }
-  });
-})
-
-app.listen(3000, function () {
-  console.log('Domain app listening on port 3000!')
-})
+app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`))
