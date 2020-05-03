@@ -69,3 +69,9 @@ aws ec2 describe-instances --instance-ids i-xxxxxxxxxxxxxxx --query 'Reservation
 ```
 ssh -i my-key-pair.pem ec2-user@<ip-address>
 ```
+
+> To stop and terminate the instance, use the following commands
+```
+aws ec2 stop-instances --instance-ids i-xxxxxxxxxxxxxxxxxx
+aws ec2 terminate-instances --instance-ids i-xxxxxxxxxxxxxxxxxx
+```
