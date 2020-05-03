@@ -3,48 +3,20 @@
 ssh -i ravi-aws-web.pem ec2-user@<ip-address>
 ```
 
-> Install Node using NVM
-```
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
-. ~/.nvm/nvm.sh
-nvm install node
-node -e "console.log('Running Node.js ' + process.version)"
-```
-
 > Install git client
 ```
 sudo yum install git -y
 ```
 
+> Clone this repository in EC2 machine
 ```
-mkdir app
-cd app
-npm init -y
-npm in
+git clone https://github.com/rbotla/aws-intro.git
+cd aws-intro
 ```
 
-
-> Intall
-
-
+> Install Node using the install-node.sh script
 ```
-<<EOF > index.js
-
-var http = require('http')
-var url = require('url')
-
-http.createServer(onRequest).listen(3000);
-console.log('Server has started');
-
-function onRequest(request, response){
-  var pathName = url.parse(request.url).pathname
-  console.log('pathname' + pathName);
-  response.writeHead(200);
-  response.write('Hello Noders');
-  response.end();
-}
-
-EOF
-
+install-node.sh
 ```
+> 
 

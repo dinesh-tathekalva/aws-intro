@@ -1,0 +1,15 @@
+{
+  "name": "docker_web_app",
+  "version": "1.0.0",
+  "description": "Node app on express",
+  "author": "Ravi Botla",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "express": "^4.16.1",
+    "request": "^2.81.0"
+  }
+}
