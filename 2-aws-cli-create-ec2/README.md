@@ -1,4 +1,5 @@
 # AWS Cli Setup
+> Make sure you complete the CLI setup - [instructions](/aws-cli-setup).
 
 > Download AWS CLI
 Follow [instructions](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html) to download AWS CLI utility.
