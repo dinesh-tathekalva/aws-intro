@@ -1,5 +1,4 @@
-# Create a web application
-
+# AWS Cli Setup
 
 > Download AWS CLI
 Follow [instructions](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html) to download AWS CLI utility.
@@ -46,14 +45,3 @@ aws configure
 | South America (São Paulo)  | sa-east-1      | 
 
 ![AWS Configure](aws-configure.png)
-
-> Run the following command to create an EC2 machine
-```
-
-```
-
-> 
-```
-aws ec2 describe-regions --output table
-```
-
