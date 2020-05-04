@@ -1,5 +1,5 @@
 # Creating an EC2 machine with CLI
-> Make sure you complete the CLI setup - [instructions](/aws-cli-setup).
+> Make sure you complete the CLI setup - [instructions](/1-aws-cli-setup).
 
 > Create a virtual firewall that we will associate with our EC2 machine
 ```
