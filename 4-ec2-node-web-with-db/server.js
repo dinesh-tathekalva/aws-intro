@@ -53,12 +53,8 @@ function queryAllRows() {
 
 app.get("/", function (req, res) {
   //res.status(200).send(JSON.stringify())
-
-  res.format({
-    json: function () {
-      res.send({ ideas: queryAllRows() })
-    }
-  })
+  res.setHeader('Content-Type', 'application/json');
+  res.json({ ideas: queryAllRows() })
 });
 
 app.listen(3000);
