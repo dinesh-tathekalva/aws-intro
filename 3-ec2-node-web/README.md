@@ -1,4 +1,4 @@
-> SSH into the AWS EC2 machine. Please refer to [link](/aws-cli-create-ec2) on how to create a new EC2 machine.
+> SSH into the AWS EC2 machine. Refer to [link](/2-aws-cli-create-ec2) on how to create a new EC2 machine.
 ```
 ssh -i ravi-aws-web.pem ec2-user@<ip-address>
 ```
