@@ -42,13 +42,13 @@ function insertSampleRecords() {
 
 app.get("/", function (req, res) {
   //res.status(200).send(JSON.stringify())
-  res.setHeader('Content-Type', 'application/html');
+  res.setHeader('Content-Type', 'text/html');
   pool.query('SELECT idea FROM app_ideas',(err, data) => {
     if(err) {
       console.error(err);
       return;
     }
-    res.render(formatHTML(data))
+    res.render(new Buffer(formatHTML(data)));
   });
 });
 
