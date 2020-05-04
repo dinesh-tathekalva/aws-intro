@@ -40,13 +40,12 @@ function insertSampleRecords() {
 }
 //insertSampleRecords();
 
-function queryAllRows() {
-  pool.query('SELECT idea FROM app_ideas',(err, data) => {
+async function queryAllRows() {
+  return await pool.query('SELECT idea FROM app_ideas',(err, data) => {
       if(err) {
         console.error(err);
         return;
       }
-      console.log(data)
       return data;
   });
 }
