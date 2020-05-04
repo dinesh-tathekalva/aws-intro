@@ -46,7 +46,7 @@ function queryAllRows() {
         console.error(err);
         return;
       }
-      // rows fetch
+      console.log(data)
       return data;
   });
 }
