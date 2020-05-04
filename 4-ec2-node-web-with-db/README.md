@@ -69,6 +69,6 @@ http://<ec2-public-ip-address>:3000
 > Install mysql client on EC2
 ```
 sudo yum install mysql -y
-mysql -u master -h db-instance.cfb1dqjdq1bs.us-east-1.rds.amazonaws.com -p mysql
-mysql -u nixcraft -h server1.cyberciti.biz -p salesdata
+mysql -u master -h db-instance.cfb1dqjdq1bs.us-east-1.rds.amazonaws.com -p aws_learning
+password: secret99
 ```

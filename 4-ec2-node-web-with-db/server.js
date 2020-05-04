@@ -40,7 +40,7 @@ function insertSampleRecords() {
 }
 
 function queryAllRows() {
-  let selectQuery = 'SELECT idea FROM ideas';
+  let selectQuery = 'SELECT idea FROM app_ideas';
   pool.query(query,(err, data) => {
       if(err) {
           console.error(err);
