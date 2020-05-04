@@ -12,6 +12,15 @@ var pool = mysql.createPool({
   debug: false
 });
 
+pool.query('CREATE DATABASE IF NOT EXISTS aws_learning',(err, data) => {
+  if(err) {
+      console.error(err);
+      return;
+  }
+  console.log(data);
+});
+
+
 pool.query('CREATE TABLE IF NOT EXISTS app_ideas (id INT AUTO_INCREMENT PRIMARY KEY, idea VARCHAR(255))',(err, data) => {
   if(err) {
       console.error(err);
