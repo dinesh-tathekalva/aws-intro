@@ -12,7 +12,7 @@ var pool = mysql.createPool({
   debug: false
 });
 
-pool.query('CREATE DATABASE IF NOT EXISTS aws_learning',(err, data) => {
+pool.query(`CREATE DATABASE IF NOT EXISTS ${config.database}`,(err, data) => {
   if(err) {
       console.error(err);
       return;
