@@ -48,7 +48,7 @@ app.get("/", function (req, res) {
       console.error(err);
       return;
     }
-    res.send(new Buffer(formatHTML(data)));
+    res.send(Buffer.from(formatHTML(data)));
   });
 });
 
