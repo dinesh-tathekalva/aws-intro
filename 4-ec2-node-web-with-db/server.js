@@ -47,13 +47,12 @@ function queryAllRows() {
           return;
       }
       // rows fetch
-      console.log(data);
+      return data;
   });
 }
 
 app.get("/", function (req, res) {
-  queryAllRows();
-  res.status(200).res.send('hello world')
+  res.status(200).send(JSON.stringify(queryAllRows()))
 });
 
 app.listen(3000);
