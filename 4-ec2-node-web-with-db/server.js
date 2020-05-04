@@ -33,7 +33,7 @@ function insertSampleRecords() {
   const ideas = ['A weight tracker app','A calculator app','A book database','A recipes app','A bill tracker','An expenses tracker','A chat application','A notes app','A personal diary app','A pomodoro app','A meme generator','Tic-tac-toe game','The game of life','A blog engine','A QA engine','A forum engine','An embeddable live chat','A Hacker News client','A Reddit client','An Instagram client','A GitHub API client','An Unsplash API client']
   
   var sql = "INSERT INTO app_ideas (idea) VALUES ?";
-  con.query(sql, [ideas.map(i => [i])], function (err, result) {
+  pool.query(sql, [ideas.map(i => [i])], function (err, result) {
     if (err) throw err;
     console.log("Number of records inserted: " + result.affectedRows);
   });
