@@ -38,7 +38,7 @@ function insertSampleRecords() {
     console.log("Number of records inserted: " + result.affectedRows);
   });
 }
-insertSampleRecords();
+//insertSampleRecords();
 
 function queryAllRows() {
   pool.query('SELECT idea FROM app_ideas',(err, data) => {
