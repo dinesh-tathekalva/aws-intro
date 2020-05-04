@@ -1,7 +1,7 @@
 var express = require("express");
 var mysql = require('mysql');
 var app = express();
-const config = require('config');
+const config = require('./db.config');
 
 var pool = mysql.createPool({
   connectionLimit: 100, //important
