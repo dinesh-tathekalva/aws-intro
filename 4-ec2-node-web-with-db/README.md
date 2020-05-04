@@ -35,6 +35,7 @@ ssh -i ravi-aws-web.pem ec2-user@<ip-address>
 
 > Clone this repository in EC2 machine if you already didn't.
 ```
+git config --global credential.helper store
 git clone https://github.com/rbotla/aws-intro.git
 ```
 
