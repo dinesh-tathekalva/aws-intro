@@ -42,18 +42,22 @@ function insertSampleRecords() {
 
 app.get("/", function (req, res) {
   //res.status(200).send(JSON.stringify())
-  res.setHeader('Content-Type', 'application/json');
+  res.setHeader('Content-Type', 'application/html');
   pool.query('SELECT idea FROM app_ideas',(err, data) => {
     if(err) {
       console.error(err);
       return;
     }
-    res.json({ ideas: data })
+    res.render(formatHTML(data))
   });
 });
 
 app.listen(3000);
 
-
-
-
+function formatHTML(ideas) {
+  return ideas.map(i => {
+    return `
+      <div style="width:300px; border: 1px solid blue; padding: 10px; margin: 10px;">${i.idea}</div>
+    `
+  })
+} 
