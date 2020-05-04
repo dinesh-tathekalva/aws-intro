@@ -43,8 +43,8 @@ function insertSampleRecords() {
 function queryAllRows() {
   pool.query('SELECT idea FROM app_ideas',(err, data) => {
       if(err) {
-          console.error(err);
-          return;
+        console.error(err);
+        return;
       }
       // rows fetch
       return data;
@@ -52,7 +52,13 @@ function queryAllRows() {
 }
 
 app.get("/", function (req, res) {
-  res.status(200).send(JSON.stringify(queryAllRows()))
+  //res.status(200).send(JSON.stringify())
+
+  res.format({
+    json: function () {
+      res.send({ ideas: queryAllRows() })
+    }
+  })
 });
 
 app.listen(3000);
