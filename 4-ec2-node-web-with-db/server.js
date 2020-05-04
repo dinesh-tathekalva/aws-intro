@@ -57,6 +57,6 @@ app.listen(3000);
 function formatHTML(ideas) {
   return ideas.map(i => {
     const is = `<div style="width:300px; border: 1px solid blue; padding: 10px; margin: 10px;">${i.idea}</div>`;
-    return is.join('<br />');
+    return is.join('\n');
   })
 } 
