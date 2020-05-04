@@ -40,20 +40,16 @@ function insertSampleRecords() {
 }
 //insertSampleRecords();
 
-async function queryAllRows() {
-  return await pool.query('SELECT idea FROM app_ideas',(err, data) => {
-      if(err) {
-        console.error(err);
-        return;
-      }
-      return data;
-  });
-}
-
 app.get("/", function (req, res) {
   //res.status(200).send(JSON.stringify())
   res.setHeader('Content-Type', 'application/json');
-  res.json({ ideas: queryAllRows() })
+  pool.query('SELECT idea FROM app_ideas',(err, data) => {
+    if(err) {
+      console.error(err);
+      return;
+    }
+    res.json({ ideas: data })
+  });
 });
 
 app.listen(3000);
