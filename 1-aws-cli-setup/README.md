@@ -1,77 +1,53 @@
-# Creating an EC2 machine with CLI
+# AWS Cli Setup
+> Make sure you complete the CLI setup - [instructions](/aws-cli-setup).
 
-> Create a virtual firewall that we will associate with our EC2 machine
-```
-aws ec2 create-security-group --group-name ec2SecurityGroup --description "A firewall to our EC2 machine"
-```
-Make a note of the group id retruned by the above command. We will use this security group id for creating the EC2 machine.
+> Download AWS CLI
+Follow [instructions](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html) to download AWS CLI utility.
 
-> Add firewall rules to allow inbound port 22 and 3000 from anywhere (0.0.0.0/0)
-```
-aws ec2 authorize-security-group-ingress --group-name example --protocol tcp --port 22 --cidr 0.0.0.0/0
-aws ec2 authorize-security-group-ingress --group-name example --protocol tcp --port 3000 --cidr 0.0.0.0/0
-```
+> Create Access credentials
+1. Go to https://console.aws.amazon.com/iam/home?region=us-east-1#/users
+2. Select your user that want to login as from CLI.
+3. Click "Security Credentials" tab
+4. Click "Create access key" button
+![Generate a new access key](create-access-key.png)
+5. You should see a popup. Make sure you save this infromation locally **as the secret info won't show up again**.
+![Credentials](credentials.png)
 
-> Create a keypair. We will use this key pair to SSH into the EC2 machine from a remote machine. ***Make sure you keep this key pair file safe.** This is key pair is the key to your environemnt.
+> Configure CLI using the credentials generated above. Open a terminal (Mac / Linux) or command line (windows) and enter the following command. The command line interface (CLI) interactively asks for Access ket, secret and the region. 
 ```
-aws ec2 create-key-pair --key-name my-key-pair --query 'KeyMaterial' --output text > my-key-pair.pem
-```
-You key should look something like the following
------BEGIN RSA PRIVATE KEY-----
-EXAMPLEKEYKCAQEAy7WZhaDsrA1W3mRlQtvhwyORRX8gnxgDAfRt/gx42kWXsT4rXE/b5CpSgie/
-vBoU7jLxx92pNHoFnByP+Dc21eyyz6CvjTmWA0JwfWiW5/akH7iO5dSrvC7dQkW2duV5QuUdE0QW
-Z/aNxMniGQE6XAgfwlnXVBwrerrQo+ZWQeqiUwwMkuEbLeJFLhMCvYURpUMSC1oehm449ilx9X1F
-G50TCFeOzfl8dqqCP6GzbPaIjiU19xX/azOR9V+tpUOzEL+wmXnZt3/nHPQ5xvD2OJH67km6SuPW
-oPzev/D8V+x4+bHthfSjR9Y7DvQFjfBVwHXigBdtZcU2/wei8D/HYwIDAQABAoIBAGZ1kaEvnrqu
-/uler7vgIn5m7lN5LKw4hJLAIW6tUT/fzvtcHK0SkbQCQXuriHmQ2MQyJX/0kn2NfjLV/ufGxbL1
-mb5qwMGUnEpJaZD6QSSs3kICLwWUYUiGfc0uiSbmJoap/GTLU0W5Mfcv36PaBUNy5p53V6G7hXb2
-bahyWyJNfjLe4M86yd2YK3V2CmK+X/BOsShnJ36+hjrXPPWmV3N9zEmCdJjA+K15DYmhm/tJWSD9
-81oGk9TopEp7CkIfatEATyyZiVqoRq6k64iuM9JkA3OzdXzMQexXVJ1TLZVEH0E7bhlY9d8O1ozR
-oQs/FiZNAx2iijCWyv0lpjE73+kCgYEA9mZtyhkHkFDpwrSM1APaL8oNAbbjwEy7Z5Mqfql+lIp1
-YkriL0DbLXlvRAH+yHPRit2hHOjtUNZh4Axv+cpg09qbUI3+43eEy24B7G/Uh+GTfbjsXsOxQx/x
-p9otyVwc7hsQ5TA5PZb+mvkJ5OBEKzet9XcKwONBYELGhnEPe7cCgYEA06Vgov6YHleHui9kHuws
-ayav0elc5zkxjF9nfHFJRry21R1trw2Vdpn+9g481URrpzWVOEihvm+xTtmaZlSp//lkq75XDwnU
-WA8gkn6O3QE3fq2yN98BURsAKdJfJ5RL1HvGQvTe10HLYYXpJnEkHv+Unl2ajLivWUt5pbBrKbUC
-gYBjbO+OZk0sCcpZ29sbzjYjpIddErySIyRX5gV2uNQwAjLdp9PfN295yQ+BxMBXiIycWVQiw0bH
-oMo7yykABY7Ozd5wQewBQ4AdSlWSX4nGDtsiFxWiI5sKuAAeOCbTosy1s8w8fxoJ5Tz1sdoxNeGs
-Arq6Wv/G16zQuAE9zK9vvwKBgF+09VI/1wJBirsDGz9whVWfFPrTkJNvJZzYt69qezxlsjgFKshy
-WBhd4xHZtmCqpBPlAymEjr/TOlbxyARmXMnIOWIAnNXMGB4KGSyl1mzSVAoQ+fqR+cJ3d0dyPl1j
-jjb0Ed/NY8frlNDxAVHE8BSkdsx2f6ELEyBKJSRr9snRAoGAMrTwYneXzvTskF/S5Fyu0iOegLDa
-NWUH38v/nDCgEpIXD5Hn3qAEcju1IjmbwlvtW+nY2jVhv7UGd8MjwUTNGItdb6nsYqM2asrnF3qS
-VRkAKKKYeGjkpUfVTrW0YFjXkfcrR/V+QFL5OndHAKJXjW7a4ejJLncTzmZSpYzwApc=
------END RSA PRIVATE KEY-----
-
-> Change permisisons on your keypair file (on Mac or Linux)
-```
-chmod 400 my-key-pair.pem
+aws configure
 ```
 
-> Run the following commands to get the EC2 image AMI
-```
-aws ec2 describe-images --owners amazon --filters 'Name=name,Values=amzn2-ami-hvm-2.0.????????-x86_64-gp2'
-'Name=state,Values=available' --output json | jq -r '.Images | sort_by(.CreationDate) | last(.[]).ImageId'
-```
+| Region                     | Region Code    | 
+|----------------------------|----------------| 
+| Region Name Code           |                | 
+| US East (Ohio)             | us-east-2      | 
+| US East (N. Virginia)      | us-east-1      | 
+| US West (N. California)    | us-west-1      | 
+| US West (Oregon)           | us-west-2      | 
+| Africa (Cape Town)         | af-south-1     | 
+| Asia Pacific (Hong Kong)   | ap-east-1      | 
+| Asia Pacific (Mumbai)      | ap-south-1     | 
+| Asia Pacific (Osaka-Local) | ap-northeast-3 | 
+| Asia Pacific (Seoul)       | ap-northeast-2 | 
+| Asia Pacific (Singapore)   | ap-southeast-1 | 
+| Asia Pacific (Sydney)      | ap-southeast-2 | 
+| Asia Pacific (Tokyo)       | ap-northeast-1 | 
+| Canada (Central)           | ca-central-1   | 
+| China (Beijing)            | cn-north-1     | 
+| China (Ningxia)            | cn-northwest-1 | 
+| Europe (Frankfurt)         | eu-central-1   | 
+| Europe (Ireland)           | eu-west-1      | 
+| Europe (London)            | eu-west-2      | 
+| Europe (Milan)             | eu-south-1     | 
+| Europe (Paris)             | eu-west-3      | 
+| Europe (Stockholm)         | eu-north-1     | 
+| Middle East (Bahrain)      | me-south-1     | 
+| South America (São Paulo)  | sa-east-1      | 
 
-> Use "t2.micro" for this example. For the complete list of EC2 machine types visit [link](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html).
+![AWS Configure](aws-configure.png)
 
-> Replace the above identified information (security group id, AMI id, and key name) in the following command and execute on the CLI
+> Run the following command to check the configuration done properly
 ```
-aws ec2 run-instances --image-id ami-xxxxxxxx --security-group-ids xxxxxxxxx --instance-type t2.micro --key-name my-key-pair
-```
-The above command returns the ec2 instance id.
-
-> Replace the instance id (returned by the above command) in the following command and run on the command line. Use describe-instances to get all the details about the instance. 
-```
-aws ec2 describe-instances --instance-ids i-xxxxxxxxxxxxxxx --query 'Reservations[0].Instances[0].PublicIpAddress'
-```
-
-> SSH into the machine using the ip adress returned by the above command.
-```
-ssh -i my-key-pair.pem ec2-user@<ip-address>
-```
-
-> To stop and terminate the instance, use the following commands
-```
-aws ec2 stop-instances --instance-ids i-xxxxxxxxxxxxxxxxxx
-aws ec2 terminate-instances --instance-ids i-xxxxxxxxxxxxxxxxxx
+aws s3 ls
 ```
