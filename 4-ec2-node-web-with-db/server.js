@@ -38,10 +38,10 @@ function insertSampleRecords() {
     console.log("Number of records inserted: " + result.affectedRows);
   });
 }
+insertSampleRecords();
 
 function queryAllRows() {
-  let selectQuery = 'SELECT idea FROM app_ideas';
-  pool.query(query,(err, data) => {
+  pool.query('SELECT idea FROM app_ideas',(err, data) => {
       if(err) {
           console.error(err);
           return;
