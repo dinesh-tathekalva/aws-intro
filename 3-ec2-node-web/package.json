@@ -5,10 +5,10 @@
   "author": "Ravi Botla",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "path": "^0.12.7"
   },
   "dependencies": {
-    "express": "^4.16.1",
-    "external-ip": "^2.3.1"
+    "express": "^4.16.1"
   }
 }
