@@ -80,6 +80,7 @@ $('#contactForm').on('submit', function(e) {
 
   const getUrl = window.location;
   const baseUrl = getUrl .protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
+  $('#notification').show();
   $.ajax({
       url: baseUrl+'api/message',
       type: 'post',
@@ -88,9 +89,6 @@ $('#contactForm').on('submit', function(e) {
       success: function(data) {
         $("#contactForm")[0].reset();
         $('#notification').delay(5000).fadeOut(); 
-        // setTimeout(function(){
-        //   $('#notification').show();// or fade, css display however you'd like.
-        // }, 5000);
         console.log(data)
       }
   });
