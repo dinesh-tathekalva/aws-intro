@@ -57,7 +57,7 @@ body {font-family: "Lato", sans-serif}
           <textarea class="w3-input w3-border" rows=5 style="resize:vertical" name="message" placeholder="Message" required spellcheck="false"></textarea>
           <button class="w3-button w3-black w3-section w3-right" type="submit">SEND</button>
         </form>
-        <div id="notification" class="w3-panel w3-green" style="visibility:hidden">
+        <div id="notification" class="w3-panel w3-green">
           <p>Thanks for reaching out! We will get back to you soon.</p>
         </div>
       </div>
@@ -73,6 +73,8 @@ body {font-family: "Lato", sans-serif}
 </footer>
 
 <script>
+$("#notification").hide();
+
 $('#contactForm').on('submit', function(e) {
   e.preventDefault();
   e.stopPropagation(); // only neccessary if something above is listening to the (default-)event too
@@ -86,9 +88,11 @@ $('#contactForm').on('submit', function(e) {
       data: $('form#contactForm').serialize(),
       success: function(data) {
         $("#contactForm")[0].reset();
-        setTimeout(function(){
-          $('#notification').show();// or fade, css display however you'd like.
-        }, 5000);
+        $("#contactForm").delay(5000).fadeIn(500);
+
+        // setTimeout(function(){
+        //   $('#notification').show();// or fade, css display however you'd like.
+        // }, 5000);
         console.log(data)
       }
   });
