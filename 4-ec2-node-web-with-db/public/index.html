@@ -55,7 +55,7 @@ body {font-family: "Lato", sans-serif}
           <input class="w3-input w3-border" type="text" placeholder="Email" required name="email">
           <div style="height: 10px"></div>
           <textarea class="w3-input w3-border" rows=5 style="resize:vertical" placeholder="message" required spellcheck="false"></textarea>
-          <button id="contact-form-submit" class="w3-button w3-black w3-section w3-right" type="submit">SEND</button>
+          <button class="w3-button w3-black w3-section w3-right" type="submit">SEND</button>
         </form>
       </div>
     </div>
@@ -70,20 +70,6 @@ body {font-family: "Lato", sans-serif}
 </footer>
 
 <script>
-$('input#contact-form-submit').click( function() {
-  const getUrl = window.location;
-  const baseUrl = getUrl .protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
-  $.ajax({
-      url: baseUrl+'api/message',
-      type: 'post',
-      dataType: 'json',
-      data: $('form#contactForm').serialize(),
-      success: function(data) {
-        console.log(data)
-      }
-  });
-});
-
 $('form#contactForm').on('submit', function(e) {
   e.preventDefault();
   e.stopPropagation(); // only neccessary if something above is listening to the (default-)event too
