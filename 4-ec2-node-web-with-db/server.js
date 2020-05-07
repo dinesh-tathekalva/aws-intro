@@ -20,7 +20,7 @@ pool.query(`CREATE DATABASE IF NOT EXISTS ${config.database}`,(err, data) => {
   console.log(data);
 });
 
-pool.query('CREATE TABLE IF NOT EXISTS messages (id INT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(255), email VARCHAR(255), message VARCHAR(800))',(err, data) => {
+pool.query('CREATE TABLE IF NOT EXISTS messages (id INT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(255), email VARCHAR(255), message VARCHAR(800), creation_date DATETIME NOT NULL DEFAULT NOW())',(err, data) => {
   if(err) {
       console.error(err);
       return;
