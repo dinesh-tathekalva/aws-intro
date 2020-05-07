@@ -70,7 +70,7 @@ body {font-family: "Lato", sans-serif}
 </footer>
 
 <script>
-$('form#contactForm').on('submit', function(e) {
+$('#contactForm').on('submit', function(e) {
   e.preventDefault();
   e.stopPropagation(); // only neccessary if something above is listening to the (default-)event too
 
