@@ -17,7 +17,7 @@ pool.query(`CREATE DATABASE IF NOT EXISTS ${config.database}`,(err, data) => {
       console.error(err);
       return;
   }
-  console.log(data);
+  console.log(config.database, ' database is successfully created.');
 });
 
 pool.query('CREATE TABLE IF NOT EXISTS messages (id INT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(255), email VARCHAR(255), message VARCHAR(800), creation_date DATETIME NOT NULL DEFAULT NOW())',(err, data) => {
@@ -25,7 +25,7 @@ pool.query('CREATE TABLE IF NOT EXISTS messages (id INT AUTO_INCREMENT PRIMARY K
       console.error(err);
       return;
   }
-  console.log(data);
+  console.log('MESSAGES table is successfully created.');
 });
 
 app.use(express.urlencoded());
@@ -51,17 +51,6 @@ app.post("/api/message", function (req, res) {
     res.send({id: data.insertId});
   });
 });
-
-// app.get("/api/", function (req, res) {
-//   res.setHeader('Content-Type', 'text/html');
-//   pool.query('SELECT idea FROM app_ideas',(err, data) => {
-//     if(err) {
-//       console.error(err);
-//       return;
-//     }
-//     res.send(formatHTML(data));
-//   });
-// });
 
 app.listen(3000);
 
