@@ -29,7 +29,6 @@ pool.query('CREATE TABLE IF NOT EXISTS messages (id INT AUTO_INCREMENT PRIMARY K
 });
 
 app.get('/', (req, res) => {
-  if (err) throw err;
   res.sendFile('index.html');
 })
 

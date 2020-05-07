@@ -7,7 +7,6 @@ const port = 3000
 app.use(express.static('public'))
 
 app.get('/', (req, res) => {
-  if (err) throw err;
   res.sendFile('index.html');
 })
 
