@@ -84,6 +84,23 @@ $('input#contact-form-submit').click( function() {
   });
 });
 
+$('form#contactForm').on('submit', function(e) {
+  e.preventDefault();
+  e.stopPropagation(); // only neccessary if something above is listening to the (default-)event too
+
+  const getUrl = window.location;
+  const baseUrl = getUrl .protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
+  $.ajax({
+      url: baseUrl+'api/message',
+      type: 'post',
+      dataType: 'json',
+      data: $('form#contactForm').serialize(),
+      success: function(data) {
+        console.log(data)
+      }
+  });
+});
+
 
 document.getElementById('contactForm').action = baseUrl+'api/message';
 
