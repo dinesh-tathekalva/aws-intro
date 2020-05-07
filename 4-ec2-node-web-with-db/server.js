@@ -47,7 +47,8 @@ app.post("/api/message", function (req, res) {
       console.error(err);
       return;
     }
-    res.send(data.insertId);
+    res.setHeader('Content-Type', 'application/json');
+    res.send({id: data.insertId});
   });
 });
 

@@ -6,6 +6,7 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin="anonymous"></script>
 <style>
 body {font-family: "Lato", sans-serif}
 .mySlides {display: none}
@@ -48,13 +49,13 @@ body {font-family: "Lato", sans-serif}
         <i class="fa fa-envelope" style="width:30px"> </i> Email: <a href="email:contact@knowvial.com">contact@knowvial.com</a><br>
       </div>
       <div class="w3-col m6">
-        <form id="contactForm" action="/" method="post" target="_blank">
+        <form id="contactForm">
           <input class="w3-input w3-border" type="text" placeholder="Name" required name="name">
           <div style="height: 10px"></div>
           <input class="w3-input w3-border" type="text" placeholder="Email" required name="email">
           <div style="height: 10px"></div>
           <textarea class="w3-input w3-border" rows=5 style="resize:vertical" placeholder="message" required spellcheck="false"></textarea>
-          <button class="w3-button w3-black w3-section w3-right" type="submit">SEND</button>
+          <button id="contact-form-submit" class="w3-button w3-black w3-section w3-right" type="submit">SEND</button>
         </form>
       </div>
     </div>
@@ -69,8 +70,21 @@ body {font-family: "Lato", sans-serif}
 </footer>
 
 <script>
-const getUrl = window.location;
-const baseUrl = getUrl .protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
+$('input#contact-form-submit').click( function() {
+  const getUrl = window.location;
+  const baseUrl = getUrl .protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
+  $.ajax({
+      url: baseUrl+'api/message',
+      type: 'post',
+      dataType: 'json',
+      data: $('form#contactForm').serialize(),
+      success: function(data) {
+        console.log(data)
+      }
+  });
+});
+
+
 document.getElementById('contactForm').action = baseUrl+'api/message';
 
 // Automatic Slideshow - change image every 4 seconds
