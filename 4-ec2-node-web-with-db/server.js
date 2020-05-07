@@ -28,6 +28,8 @@ pool.query('CREATE TABLE IF NOT EXISTS messages (id INT AUTO_INCREMENT PRIMARY K
   console.log(data);
 });
 
+app.use(express.static('public'))
+
 app.get('/', (req, res) => {
   res.sendFile('index.html');
 })
