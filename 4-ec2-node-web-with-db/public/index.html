@@ -86,7 +86,9 @@ $('#contactForm').on('submit', function(e) {
       data: $('form#contactForm').serialize(),
       success: function(data) {
         $("#contactForm")[0].reset();
-        $("#notification").show().delay(5000).fadeOut();
+        setTimeout(function(){
+          $('#notification').show();// or fade, css display however you'd like.
+        }, 5000);
         console.log(data)
       }
   });
