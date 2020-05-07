@@ -71,7 +71,7 @@ body {font-family: "Lato", sans-serif}
 <script>
 const getUrl = window.location;
 const baseUrl = getUrl .protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
-document.getElementById('contactForm').action = baseUrl+'/api/message';
+document.getElementById('contactForm').action = baseUrl+'api/message';
 
 // Automatic Slideshow - change image every 4 seconds
 var myIndex = 0;
