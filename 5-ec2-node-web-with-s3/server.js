@@ -37,7 +37,7 @@ pool.query(`CREATE DATABASE IF NOT EXISTS ${config.database}`,(err, data) => {
   console.log(config.database, ' database is successfully created.');
 });
 
-pool.query('CREATE TABLE IF NOT EXISTS proposals (id INT AUTO_INCREMENT PRIMARY KEY, s3_url VARCHAR(255), creation_date DATETIME NOT NULL DEFAULT NOW())',(err, data) => {
+pool.query($`CREATE TABLE IF NOT EXISTS ${config.database}.proposals (id INT AUTO_INCREMENT PRIMARY KEY, s3_url VARCHAR(255), creation_date DATETIME NOT NULL DEFAULT NOW())`,(err, data) => {
   if(err) {
       console.error(err);
       return;
@@ -76,7 +76,7 @@ app.post("/api/proposals", function (req, res) {
       if (err) throw err;
       console.log(`File uploaded successfully. ${data.Location}`);
 
-      let insertQuery = 'INSERT INTO proposals (s3_url) VALUES (?)';
+      let insertQuery = `INSERT INTO ${config.database}.proposals (s3_url) VALUES (?)`;
       let query = mysql.format(insertQuery,[data.Location]);
       
       pool.query(query,(err, data) => {
@@ -93,7 +93,7 @@ app.post("/api/proposals", function (req, res) {
 app.get("/api/proposals", function (req, res) {
   console.log(req.body);
   const {name, email, message} = req.body;
-  let insertQuery = 'INSERT INTO messages (name, email, message) VALUES (?,?,?)';
+  let insertQuery = `INSERT INTO ${config.database}.messages (name, email, message) VALUES (?,?,?)`;
   let query = mysql.format(insertQuery,[name, email, message]);
   
   pool.query(query,(err, data) => {
@@ -109,7 +109,7 @@ app.get("/api/proposals", function (req, res) {
 app.post("/api/message", function (req, res) {
   console.log(req.body);
   const {name, email, message} = req.body;
-  let insertQuery = 'INSERT INTO messages (name, email, message) VALUES (?,?,?)';
+  let insertQuery = `INSERT INTO ${config.database}.messages (name, email, message) VALUES (?,?,?)`;
   let query = mysql.format(insertQuery,[name, email, message]);
   
   pool.query(query,(err, data) => {
