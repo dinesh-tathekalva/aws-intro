@@ -64,7 +64,9 @@ pool.query('CREATE TABLE IF NOT EXISTS proposals (id INT AUTO_INCREMENT PRIMARY 
 
 app.use(express.urlencoded());
 app.use(express.json());
-app.use(express.static('public'))
+// app.use(express.static('public'))
+app.use(express.static(path.join(__dirname, 'public')));
+
 app.use(fileupload({ safeFileNames: true, preserveExtension: 2, fileSize: 5 * 1024 * 1024 }))
 
 app.get('/', (req, res) => {
@@ -72,7 +74,7 @@ app.get('/', (req, res) => {
 })
 
 app.get('/proposals', (req, res) => {
-  res.sendFile(__dirname + '/proposals.html');
+  res.sendFile('proposals.html');
 })
 
 app.post("/api/proposals", function (req, res) {
