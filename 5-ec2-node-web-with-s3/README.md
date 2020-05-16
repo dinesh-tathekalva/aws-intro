@@ -18,6 +18,7 @@ aws iam create-access-key
 > Create a S3 bucket. Replace 98452 with a random to make it a unique name within the region.
 ```
 aws s3api create-bucket --bucket aws-learning-98452 --region us-east-1
+aws s3api put-bucket-acl --bucket aws-learning-98452 --acl public-read
 ```
 Make a note of the S3 bucket name. You will use this bucket name later.
 
@@ -72,7 +73,6 @@ password: secret99
 
 select * from proposals
 ```
-
 --- you don't need to do the following ---
 
 > Create a new Cognito Pool

@@ -87,7 +87,8 @@ app.post("/api/proposals", function (req, res) {
   const params = {
       Bucket: S3BUCKET,
       Key: 'proposals/'+req.files.filetoupload.name, // File name you want to save as in S3
-      Body: fileContent
+      Body: fileContent,
+      ACL:'public-read'
   };
 
   // Uploading files to the bucket
