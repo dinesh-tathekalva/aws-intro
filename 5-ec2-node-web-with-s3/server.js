@@ -30,11 +30,11 @@ const pool = mysql.createPool({
 });
 
 pool.query(`
-CREATE DATABASE IF NOT EXISTS ${config.database}
+CREATE DATABASE IF NOT EXISTS ${config.database};
 
-USE ${config.database}
+USE ${config.database};
 
-CREATE TABLE IF NOT EXISTS proposals (id INT AUTO_INCREMENT PRIMARY KEY, s3_url VARCHAR(255), creation_date DATETIME NOT NULL DEFAULT NOW())
+CREATE TABLE IF NOT EXISTS proposals (id INT AUTO_INCREMENT PRIMARY KEY, s3_url VARCHAR(255), creation_date DATETIME NOT NULL DEFAULT NOW());
 
 `,(err, data) => {
   if(err) {
