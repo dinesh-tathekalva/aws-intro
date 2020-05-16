@@ -3,6 +3,7 @@ const mysql = require('mysql');
 const AWS = require('aws-sdk');
 const config = require('./config');
 const fileupload = require('express-fileupload')
+const path = require("path");
 
 const app = express();
 
