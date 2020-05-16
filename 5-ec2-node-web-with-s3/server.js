@@ -21,7 +21,7 @@ const s3 = new AWS.S3({
 
 /***********************************************************/
 
-const pool = mysql.createPool({
+let pool = mysql.createPool({
   connectionLimit: 100, //important
   host: config.host,
   user: config.user,
@@ -29,37 +29,38 @@ const pool = mysql.createPool({
   debug: false
 });
 
-pool.query(`
-CREATE DATABASE IF NOT EXISTS ${config.database};
-
-USE ${config.database};
-
-CREATE TABLE IF NOT EXISTS proposals (id INT AUTO_INCREMENT PRIMARY KEY, s3_url VARCHAR(255), creation_date DATETIME NOT NULL DEFAULT NOW());
-
-`,(err, data) => {
+pool.query(`CREATE DATABASE IF NOT EXISTS ${config.database}`,(err, data) => {
   if(err) {
       console.error(err);
       return;
   }
-  console.log('Database and tables created is successfully created.');
+  console.log(config.database, ' database is successfully created.');
+});
+pool = mysql.createPool({
+  connectionLimit: 100, //important
+  host: config.host,
+  user: config.user,
+  password: config.password,
+  database: config.database, // <<<< set database
+  debug: false
 });
 
-// pool.query(`USE ${config.database}`,(err, data) => {
-//   if(err) {
-//       console.error(err);
-//       return;
-//   }
-//   console.log('Switched to database:',config.database,' successfully created.');
-// });
+pool.query(`USE ${config.database}`,(err, data) => {
+  if(err) {
+      console.error(err);
+      return;
+  }
+  console.log('Switched to database:',config.database,' successfully created.');
+});
 
 
-// pool.query('CREATE TABLE IF NOT EXISTS proposals (id INT AUTO_INCREMENT PRIMARY KEY, s3_url VARCHAR(255), creation_date DATETIME NOT NULL DEFAULT NOW())',(err, data) => {
-//   if(err) {
-//       console.error(err);
-//       return;
-//   }
-//   console.log('MESSAGES table is successfully created.');
-// });
+pool.query('CREATE TABLE IF NOT EXISTS proposals (id INT AUTO_INCREMENT PRIMARY KEY, s3_url VARCHAR(255), creation_date DATETIME NOT NULL DEFAULT NOW())',(err, data) => {
+  if(err) {
+      console.error(err);
+      return;
+  }
+  console.log('MESSAGES table is successfully created.');
+});
 
 app.use(express.urlencoded());
 app.use(express.json());

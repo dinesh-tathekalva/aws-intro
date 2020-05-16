@@ -60,7 +60,6 @@ npm install
 ```
 npm start
 ```
-
 > Access the application via browser. Get the public IP adresss of the EC2 machine.
 ```
 http://<ec2-public-ip-address>:3000
