@@ -79,7 +79,7 @@ app.get('/proposals', (req, res) => {
 })
 
 app.post("/api/proposals", function (req, res) {
-  console.log(JSON.stringify(req));  
+  console.log(JSON.stringify(req.files));  
 
   // Read content from the file
   const fileContent  = Buffer.from(req.files.uploadedFileName.data, 'binary');
