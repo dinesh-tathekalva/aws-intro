@@ -78,8 +78,6 @@ app.get('/proposals', (req, res) => {
 })
 
 app.post("/api/proposals", function (req, res) {
-  console.log(JSON.stringify(req.files));  
-
   // Read content from the file
   const fileContent  = Buffer.from(req.files.filetoupload.data, 'binary');
 
@@ -119,13 +117,11 @@ app.get("/api/proposals", function (req, res) {
     }
     res.setHeader('Content-Type', 'application/json');
     const ndata = Object.values(JSON.parse(JSON.stringify(data)))
-    console.log(ndata);
     res.send(ndata);
   });
 });
 
 app.post("/api/message", function (req, res) {
-  console.log(req.body);
   const {name, email, message} = req.body;
   let insertQuery = 'INSERT INTO messages (name, email, message) VALUES (?,?,?)';
   let query = mysql.format(insertQuery,[name, email, message]);
