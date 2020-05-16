@@ -120,7 +120,7 @@ app.get("/api/proposals", function (req, res) {
     res.setHeader('Content-Type', 'application/json');
     console.log(JSON.parse(JSON.stringify(data)));
     const ndata = Object.values(JSON.parse(JSON.stringify(data))).map(v => {link: v.s3_url})
-    res.send(data);
+    res.send(ndata);
   });
 });
 
