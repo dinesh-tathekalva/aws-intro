@@ -118,8 +118,8 @@ app.get("/api/proposals", function (req, res) {
       return;
     }
     res.setHeader('Content-Type', 'application/json');
-    console.log(data);
-    res.send({link: data.s3_url});
+    console.log(JSON.parse(JSON.stringify(data)));
+    res.send({link: JSON.parse(JSON.stringify(data)).s3_url});
   });
 });
 
@@ -135,7 +135,7 @@ app.post("/api/message", function (req, res) {
       return;
     }
     res.setHeader('Content-Type', 'application/json');
-    res.send({id: data.insertId});
+    res.send({id: JSON.parse(JSON.stringify(data)).insertId});
   });
 });
 
