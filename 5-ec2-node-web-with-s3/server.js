@@ -66,7 +66,7 @@ pool.query('CREATE TABLE IF NOT EXISTS proposals (id INT AUTO_INCREMENT PRIMARY 
 app.use(express.urlencoded());
 app.use(express.json());
 // app.use(express.static('public'))
-app.use(express.static(path.join(__dirname, 'public')));
+app.use("/public", express.static(path.join(__dirname, 'public')));
 
 app.use(fileupload({ safeFileNames: true, preserveExtension: 2, fileSize: 5 * 1024 * 1024 }))
 
