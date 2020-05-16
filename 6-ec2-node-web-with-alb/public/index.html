@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<title>Knowvial Inc.</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+<style>
+body {font-family: "Lato", sans-serif}
+.mySlides {display: none}
+</style>
+<body>
+
+<!-- Navbar -->
+<div class="w3-top">
+  <div class="w3-bar w3-black w3-card">
+    <h1 class="w3-xxlarge w3-text-white"><span class="w3-padding w3-black w3-opacity-min"><b>Knowvial</b></span> <span class="w3-hide-small w3-text-light-grey">Technologies</span></h1>
+  </div>
+</div>
+
+<!-- Page content -->
+<div class="w3-content" style="max-width:2000px;margin-top:46px">
+
+  <!-- Automatic Slideshow Images -->
+  <div class="mySlides w3-display-container w3-center">
+    <img src="https://templates-1979.s3.amazonaws.com/learning/landing.jpg" style="width:100%">
+  </div>
+
+  <!-- The Band Section -->
+  <div class="w3-black" id="about">
+    <div class="w3-container w3-content w3-center w3-padding-64" style="max-width:800px" id="band">
+      <h2 class="w3-wide">AWS Services</h2>
+      <p class="w3-opacity"><i>We specialize in building cost-effective, scalable & relaiable AWS solutions.</i></p>
+      <p class="w3-justify">Our goal is to ensure your success on AWS. We help you navigate the complete Amazon Web Services suite of powerful cloud infrastructure services and guide your cloud strategy for getting the most out of AWS.</p>
+      <p class="w3-justify">As one of only a few AWS Premier Consulting Partners, we have the capabilities necessary to build, deploy, and manage complex cloud architectures on AWS. Our long track record of successful DevOps projects, cloud application development, and infrastructure migrations spans more than a hundred client engagements.</p>
+    </div>
+  </div>
+
+  <!-- The Contact Section -->
+  <div class="w3-container w3-content w3-padding-64" style="max-width:800px" id="contact">
+    <h2 class="w3-wide w3-center">CONTACT</h2>
+    <p class="w3-opacity w3-center"><i>Drop a note!</i></p>
+    <div class="w3-row w3-padding-32">
+      <div class="w3-col m6 w3-large w3-margin-bottom">
+        <i class="fa fa-map-marker" style="width:30px"></i> San Mateo, US<br>
+        <i class="fa fa-phone" style="width:30px"></i> Phone: +1 650 786 4345<br>
+        <i class="fa fa-envelope" style="width:30px"> </i> Email: <a href="email:contact@knowvial.com">contact@knowvial.com</a><br>
+      </div>
+      <div class="w3-col m6">        
+        <form id="contactForm">
+          <input class="w3-input w3-border" type="text" placeholder="Name" required name="name">
+          <div style="height: 10px"></div>
+          <input class="w3-input w3-border" type="text" placeholder="Email" required name="email">
+          <div style="height: 10px"></div>
+          <textarea class="w3-input w3-border" rows=5 style="resize:vertical" name="message" placeholder="Message" required spellcheck="false"></textarea>
+          <button class="w3-button w3-black w3-section w3-right" type="submit">SEND</button>
+        </form>
+        
+        <div id="notification" style="display:none;">
+          <p>Thanks for reaching out! We will get back to you soon.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+<!-- End Page Content -->
+</div>
+
+<!-- Footer -->
+<footer class="w3-container w3-center w3-opacity w3-light-grey w3-medium">
+  <small>&copy; Copyright 2020, Knowvial Inc.</small>
+</footer>
+
+<script>
+$('#contactForm').on('submit', function(e) {
+  e.preventDefault();
+  e.stopPropagation(); // only neccessary if something above is listening to the (default-)event too
+
+  const getUrl = window.location;
+  const baseUrl = getUrl .protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
+  $.ajax({
+      url: baseUrl+'api/message',
+      type: 'post',
+      dataType: 'json',
+      data: $('form#contactForm').serialize(),
+      success: function(data) {
+        $("#contactForm")[0].reset();
+        $('#notification').show();
+        $('#notification').delay(3000).fadeOut(); 
+        console.log(data)
+      }
+  });
+});
+
+// Automatic Slideshow - change image every 4 seconds
+var myIndex = 0;
+carousel();
+
+function carousel() {
+  var i;
+  var x = document.getElementsByClassName("mySlides");
+  for (i = 0; i < x.length; i++) {
+    x[i].style.display = "none";  
+  }
+  myIndex++;
+  if (myIndex > x.length) {myIndex = 1}    
+  x[myIndex-1].style.display = "block";  
+  setTimeout(carousel, 4000);    
+}
+
+// Used to toggle the menu on small screens when clicking on the menu button
+function myFunction() {
+  var x = document.getElementById("navDemo");
+  if (x.className.indexOf("w3-show") == -1) {
+    x.className += " w3-show";
+  } else { 
+    x.className = x.className.replace(" w3-show", "");
+  }
+}
+
+// When the user clicks anywhere outside of the modal, close it
+var modal = document.getElementById('ticketModal');
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+</script>
+
+</body>
+</html>
