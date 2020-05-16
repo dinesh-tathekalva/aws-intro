@@ -21,14 +21,15 @@ body {font-family: "Lato", sans-serif}
 </div>
 
 <!-- Page content -->
-<div class="w3-content" style="max-width:2000px;margin-top:46px">
+<div class="w3-content" style="max-width:2000px;margin-top:46px; min-height: calc(100vh-60px);">
   <!-- The Contact Section -->
   <div class="w3-container w3-content w3-padding-64" style="max-width:800px" id="contact">
     <h2 class="w3-wide w3-center">Proposals</h2>
     <div class="w3-row w3-padding-32">
       <div class="w3-col m6">        
         <form id="fileUpload" action="fileupload" method="post" enctype="multipart/form-data">
-          <input type="file" name="filetoupload" size=60 style="border: 1px solid #ccc; display: inline-block; padding: 6px 12px;cursor: pointer;"><br>
+          <input type="file" name="filetoupload" size=60 style="border: 1px dotted #ccc; display: inline-block; padding: 6px 12px;cursor: pointer;"><br>
+          </br>
           <input type="submit">
         </form>        
         <div id="notification" style="display:none;">
