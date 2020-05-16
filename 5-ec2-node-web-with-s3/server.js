@@ -37,7 +37,7 @@ pool.query(`CREATE DATABASE IF NOT EXISTS ${config.database}`,(err, data) => {
   console.log(config.database, ' database is successfully created.');
 });
 
-pool.query($`CREATE TABLE IF NOT EXISTS ${config.database}.proposals (id INT AUTO_INCREMENT PRIMARY KEY, s3_url VARCHAR(255), creation_date DATETIME NOT NULL DEFAULT NOW())`,(err, data) => {
+pool.query(`CREATE TABLE IF NOT EXISTS ${config.database}.proposals (id INT AUTO_INCREMENT PRIMARY KEY, s3_url VARCHAR(255), creation_date DATETIME NOT NULL DEFAULT NOW())`,(err, data) => {
   if(err) {
       console.error(err);
       return;
