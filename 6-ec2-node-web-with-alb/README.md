@@ -53,3 +53,12 @@ npm start
 http://<ec2-public-ip-address>:3000
 ```
 
+> Create load balancer
+Pick any 2 subnet ids from the following command output
+```
+aws ec2 describe-subnets
+```
+Update your appropriate subnets and the security group (firewall) - I'm using the same security group that I used for EC2.
+```
+aws elbv2 create-load-balancer --name my-load-balancer  --subnets subnet-f83f5cc6 subnet-39998f36 --security-groups sg-83365bd9
+```
