@@ -118,6 +118,7 @@ app.get("/api/proposals", function (req, res) {
       return;
     }
     res.setHeader('Content-Type', 'application/json');
+    console.log(data);
     res.send({link: data.s3_url});
   });
 });
