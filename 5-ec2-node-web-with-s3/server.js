@@ -59,7 +59,7 @@ pool.query('CREATE TABLE IF NOT EXISTS proposals (id INT AUTO_INCREMENT PRIMARY 
       console.error(err);
       return;
   }
-  console.log('MESSAGES table is successfully created.');
+  console.log('Proposals table is successfully created.');
 });
 
 app.use(express.urlencoded());
