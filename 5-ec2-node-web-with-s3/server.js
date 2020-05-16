@@ -72,7 +72,7 @@ app.get('/', (req, res) => {
 })
 
 app.get('/proposals', (req, res) => {
-  res.sendFile('proposals.html');
+  res.sendFile(__dirname + '/proposals.html');
 })
 
 app.post("/api/proposals", function (req, res) {
