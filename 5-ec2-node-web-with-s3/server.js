@@ -82,7 +82,7 @@ app.post("/api/proposals", function (req, res) {
   console.log(JSON.stringify(req.files));  
 
   // Read content from the file
-  const fileContent  = Buffer.from(req.files.uploadedFileName.data, 'binary');
+  const fileContent  = Buffer.from(req.files.filetoupload.data, 'binary');
 
   // Setting up S3 upload parameters
   const params = {
