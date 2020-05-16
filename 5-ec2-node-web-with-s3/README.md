@@ -8,9 +8,9 @@ aws iam create-access-key
 {
     "AccessKey": {
         "UserName": "ravi",
-        "AccessKeyId": "AKIA5LZWWJZILC6KOSIQ",
+        "AccessKeyId": "your-access-key-id",
         "Status": "Active",
-        "SecretAccessKey": "gz+iFyY2iWmNBsFyT45rNXDPiUwlggPFwk+d8H98",
+        "SecretAccessKey": "your-secret-access-key",
         "CreateDate": "2020-05-09T16:11:34+00:00"
     }
 }
@@ -37,16 +37,20 @@ git clone https://github.com/rbotla/aws-intro.git
 cd aws-intro/4-ec2-node-web-with-db
 npm install
 ```
-
-> Update db.config file with the database details created above 
+> Create a file with filename - config.js and add the following entries
 ```
-{
+const config = {
   "host": "db-instance.cfb1dqjdq1bs.us-east-1.rds.amazonaws.com",
   "user": "master",
   "port": 3306,
   "password": "secret99",
-  "database": "db-instance"
+  "database": "aws_learning",
+  "s3Bucket": "*****YOUR BUCKET NAME*****",
+  "region": "us-east-1",
+  "AccessKeyId": ""*****YOUR ACCESS KEY ID*****",
+  "SecretAccessKey": ""*****YOUR SECRET ACCESS KEY*****"
 }
+module.exports = config;
 ```
 
 > Run the application
@@ -56,7 +60,7 @@ npm start
 
 > Access the application via browser. Get the public IP adresss of the EC2 machine.
 ```
-http://<ec2-public-ip-address>:3000
+http://<ec2-public-ip-address>:3000/proposals
 ```
 
 > Install mysql client on EC2
