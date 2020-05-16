@@ -25,16 +25,21 @@ body {font-family: "Lato", sans-serif}
   <!-- The Contact Section -->
   <div class="w3-container w3-content w3-padding-64" style="max-width:800px" id="contact">
     <h2 class="w3-wide w3-center">Proposals</h2>
-    <div class="w3-wide w3-center">
-      <form id="fileUpload" action="fileupload" method="post" enctype="multipart/form-data">
-        <div style="display: flex;">
-          <input type="file" name="filetoupload" size=60 style="border: 1px dotted #ccc; display: inline-block; padding: 6px 12px;cursor: pointer;"><br>
-          &nbsp;&nbsp;
-          <input type="submit">
+    <div class="w3-row w3-padding-32">
+      <div class="w3-col m6 w3-large w3-margin-bottom">
+        <div id="proposals" />
+      </div>
+      <div class="w3-col m6">        
+        <form id="fileUpload" action="fileupload" method="post" enctype="multipart/form-data">
+          <div style="display: flex;">
+            <input type="file" name="filetoupload" size=60 style="border: 1px dotted #ccc; display: inline-block; padding: 6px 12px;cursor: pointer;"><br>
+            &nbsp;&nbsp;
+            <input type="submit">
+          </div>
+        </form>        
+        <div id="notification" style="display:none;">
+          <p>Your file is uploaded successfully!</p>
         </div>
-      </form>        
-      <div id="notification" style="display:none;">
-        <p>Your file is uploaded successfully!</p>
       </div>
     </div>
   </div>
@@ -94,6 +99,26 @@ $('#fileUpload').on('submit', function(e) {
         $('#notification').delay(3000).fadeOut(); 
         console.log(data)
       }
+  });
+});
+
+$(document).ready(function() {
+  const getUrl = window.location;
+  const baseUrl = getUrl .protocol + "//" + getUrl.host + "/";
+
+  $.ajax({
+      type: 'GET',
+      url: baseUrl+'api/proposals',
+      async:false,
+      success: function(data) {
+          console.log(data);
+          var city = ('#proposals');
+          $(city).empty();
+          for (var i = 0; i < data.length; i++) {
+              $(city).append('<div id=' + data[i].link + '><a href="' + data[i].link + '">'+data[i].link+'</a> </option>');
+          }
+      }
+
   });
 });
 

@@ -111,24 +111,14 @@ app.post("/api/proposals", function (req, res) {
 });
 
 app.get("/api/proposals", function (req, res) {
-  var params = { 
-    Bucket: 'mystore.in',
-    Delimiter: '/',
-    Prefix: 's/5469b2f5b4292d22522e84e0/ms.files/'
-  }
-  
-  s3.listObjects(params, function (err, data) {
-  if(err)throw err;
-  console.log(data);
-  });
-   
-  pool.query(query,(err, data) => {
+
+  pool.query('select s3_url from proposals',(err, data) => {
     if(err) {
       console.error(err);
       return;
     }
     res.setHeader('Content-Type', 'application/json');
-    res.send({id: data.insertId});
+    res.send({link: data.s3_url});
   });
 });
 
