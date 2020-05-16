@@ -111,11 +111,17 @@ app.post("/api/proposals", function (req, res) {
 });
 
 app.get("/api/proposals", function (req, res) {
-  console.log(req.body);
-  const {name, email, message} = req.body;
-  let insertQuery = 'INSERT INTO messages (name, email, message) VALUES (?,?,?)';
-  let query = mysql.format(insertQuery,[name, email, message]);
+  var params = { 
+    Bucket: 'mystore.in',
+    Delimiter: '/',
+    Prefix: 's/5469b2f5b4292d22522e84e0/ms.files/'
+  }
   
+  s3.listObjects(params, function (err, data) {
+  if(err)throw err;
+  console.log(data);
+  });
+   
   pool.query(query,(err, data) => {
     if(err) {
       console.error(err);
