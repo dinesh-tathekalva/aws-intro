@@ -60,5 +60,42 @@ aws ec2 describe-subnets
 ```
 Update your appropriate subnets and the security group (firewall) - I'm using the same security group that I used for EC2.
 ```
-aws elbv2 create-load-balancer --name my-load-balancer  --subnets subnet-f83f5cc6 subnet-39998f36 --security-groups sg-83365bd9
+aws elbv2 create-load-balancer --name knowvial-alb  --subnets subnet-f83f5cc6 subnet-39998f36 --security-groups sg-83365bd9
 ```
+You should get a Arn such as arn:aws:elasticloadbalancing:us-east-1:918700838480:loadbalancer/app/knowvial-alb/69d46e03f226f8cd. We will use this Arn in the following commands.
+
+> Create target group
+
+Get the VPC Id by running the following command
+```
+aws ec2 describe-vpcs
+```
+Use the VPC Id returned in the above command to create a target group.
+```
+aws elbv2 create-target-group --name knowvial-web-tg --protocol HTTP --port 3000 --vpc-id vpc-d45c34ae
+```
+You should see JSON payload with a Target Group Arn such as arn:aws:elasticloadbalancing:us-east-1:918700838480:targetgroup/knowvial-web-tg/9c36425d7505875f. Make a note of this Arn. We will use this in the following commands.
+
+> Register targets with the above target group
+Find out your EC2 instance ids by running the following command
+```
+aws ec2 describe-instances --query 'Reservations[].Instances[].[PublicIpAddress,InstanceId,Tags[?Key==`Name`].Value[]]' --output text | sed 's/None$/None\n/' | sed '$!N;s/\n/ /'
+```
+
+```
+aws elbv2 register-targets --target-group-arn targetgroup-arn  --targets Id=i-0fc282b8157cea665 Id=i-0985fe89ff2c905d7
+
+```
+
+> Create load balancer listener
+```
+aws elbv2 create-listener --load-balancer-arn loadbalancer-arn --protocol HTTP --port 80  --default-actions Type=forward,TargetGroupArn=targetgroup-arn
+```
+
+> Find out the load balancer for the ALB
+```
+aws elbv2 describe-load-balancers
+```
+Make a note of the "DNSName" attribute. That will be the URL you will use to access the application.
+
+http://knowvial-alb-99652294.us-east-1.elb.amazonaws.com

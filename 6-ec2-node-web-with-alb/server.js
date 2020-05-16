@@ -123,6 +123,7 @@ app.get("/api/proposals", function (req, res) {
 
 app.post("/api/message", function (req, res) {
   const {name, email, message} = req.body;
+  console.log(req.body)
   let insertQuery = 'INSERT INTO messages (name, email, message) VALUES (?,?,?)';
   let query = mysql.format(insertQuery,[name, email, message]);
   
