@@ -26,9 +26,6 @@ body {font-family: "Lato", sans-serif}
   <div class="w3-container w3-content w3-padding-64" style="max-width:800px" id="contact">
     <h2 class="w3-wide w3-center">Proposals</h2>
     <div class="w3-row w3-padding-32">
-      <div class="w3-col m6 w3-large w3-margin-bottom">
-        <div id="proposals" />
-      </div>
       <div class="w3-col m6">        
         <form id="fileUpload" action="fileupload" method="post" enctype="multipart/form-data">
           <div style="display: flex;">
@@ -40,6 +37,9 @@ body {font-family: "Lato", sans-serif}
         <div id="notification" style="display:none;">
           <p>Your file is uploaded successfully!</p>
         </div>
+        <div class="w3-col m6 w3-large w3-margin-bottom">
+          <div id="proposals" />
+        </div>  
       </div>
     </div>
   </div>
@@ -115,7 +115,9 @@ $(document).ready(function() {
           var city = ('#proposals');
           $(city).empty();
           for (var i = 0; i < data.length; i++) {
-              $(city).append('<div id=' + data[i]["s3_url"] + '><a href="' + data[i]["s3_url"] + '">'+data[i]["s3_url"]+'</a> </option>');
+            const url = data[i]["s3_url"];
+            const fileName = str.substr(str.lastIndexOf("/")+1, str.length)
+              $(city).append('<div id=' + fileName + '><a href="' + data[i]["s3_url"] + '">'+fileName+'</a> </option>');
           }
       }
 
