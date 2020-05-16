@@ -74,12 +74,20 @@ $('#fileUpload').on('submit', function(e) {
 
   const getUrl = window.location;
   const baseUrl = getUrl .protocol + "//" + getUrl.host + "/";
-  console.log($('form#fileUpload').serialize());
+
+  const form = $('#fileUpload')[0];
+  const formData = new FormData(form);
+  console.log(formData);
+
   $.ajax({
       url: baseUrl+'api/proposals',
       type: 'post',
-      dataType: 'json',
-      data: $('form#fileUpload').serialize(),
+      enctype: 'multipart/form-data',
+      data: formData,
+      processData: false,
+      contentType: false,
+      cache: false,
+      timeout: 600000,
       success: function(data) {
         $("#fileUpload")[0].reset();
         $('#notification').show();
