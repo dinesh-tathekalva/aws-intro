@@ -118,9 +118,9 @@ app.get("/api/proposals", function (req, res) {
       return;
     }
     res.setHeader('Content-Type', 'application/json');
-    console.log(JSON.parse(JSON.stringify(data)));
-    const ndata = Object.values(JSON.parse(JSON.stringify(data))).map(v => {link: v.s3_url})
-    res.send(ndata);
+    const ndata = Object.values(JSON.parse(JSON.stringify(data)))
+    console.log(ndata);
+    res.send(ndata.map(v => {link: v.s3_url}));
   });
 });
 
