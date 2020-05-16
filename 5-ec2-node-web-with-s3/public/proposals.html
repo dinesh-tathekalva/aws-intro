@@ -115,7 +115,7 @@ $(document).ready(function() {
           var city = ('#proposals');
           $(city).empty();
           for (var i = 0; i < data.length; i++) {
-              $(city).append('<div id=' + data[i].link + '><a href="' + data[i].link + '">'+data[i].link+'</a> </option>');
+              $(city).append('<div id=' + data[i]["s3_url"] + '><a href="' + data[i]["s3_url"] + '">'+data[i]["s3_url"]+'</a> </option>');
           }
       }
 
