@@ -116,7 +116,7 @@ $(document).ready(function() {
           $(city).empty();
           for (var i = 0; i < data.length; i++) {
             const url = data[i]["s3_url"];
-            const fileName = str.substr(str.lastIndexOf("/")+1, str.length)
+            const fileName = url.substr(url.lastIndexOf("/")+1, url.length)
               $(city).append('<div id=' + fileName + '><a href="' + data[i]["s3_url"] + '">'+fileName+'</a> </option>');
           }
       }
