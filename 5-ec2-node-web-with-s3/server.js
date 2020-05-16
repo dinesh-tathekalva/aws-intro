@@ -46,14 +46,13 @@ pool = mysql.createPool({
   debug: false
 });
 
-pool.query(`USE ${config.database}`,(err, data) => {
+pool.query('CREATE TABLE IF NOT EXISTS messages (id INT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(255), email VARCHAR(255), message VARCHAR(800), creation_date DATETIME NOT NULL DEFAULT NOW())',(err, data) => {
   if(err) {
       console.error(err);
       return;
   }
-  console.log('Switched to database:',config.database,' successfully created.');
+  console.log('MESSAGES table is successfully created.');
 });
-
 
 pool.query('CREATE TABLE IF NOT EXISTS proposals (id INT AUTO_INCREMENT PRIMARY KEY, s3_url VARCHAR(255), creation_date DATETIME NOT NULL DEFAULT NOW())',(err, data) => {
   if(err) {

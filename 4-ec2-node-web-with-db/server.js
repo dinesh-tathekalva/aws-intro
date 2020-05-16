@@ -8,7 +8,6 @@ var pool = mysql.createPool({
   host: config.host,
   user: config.user,
   password: config.password,
-  database: config.database,
   debug: false
 });
 
@@ -18,6 +17,15 @@ pool.query(`CREATE DATABASE IF NOT EXISTS ${config.database}`,(err, data) => {
       return;
   }
   console.log(config.database, ' database is successfully created.');
+});
+
+pool = mysql.createPool({
+  connectionLimit: 100, //important
+  host: config.host,
+  user: config.user,
+  password: config.password,
+  database: config.database, // <<<< set database
+  debug: false
 });
 
 pool.query('CREATE TABLE IF NOT EXISTS messages (id INT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(255), email VARCHAR(255), message VARCHAR(800), creation_date DATETIME NOT NULL DEFAULT NOW())',(err, data) => {
