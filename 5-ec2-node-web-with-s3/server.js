@@ -68,7 +68,7 @@ app.use(express.json());
 app.use(express.static('public'))
 //app.use("/public", express.static(path.join(__dirname, 'public')));
 
-app.use(fileupload({ safeFileNames: true, preserveExtension: 2, fileSize: 5 * 1024 * 1024 }))
+app.use(fileupload({ fileSize: 5 * 1024 * 1024 }))
 
 app.get('/', (req, res) => {
   res.sendFile('index.html');
